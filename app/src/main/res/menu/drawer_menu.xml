@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_myaccount"
+            android:icon="@drawable/ic_myaccount"
+            android:title="My Account" />
+        <item
+            android:id="@+id/nav_myproduct"
+            android:icon="@drawable/ic_myproduct"
+            android:title="My Product" />
+        <item
+            android:id="@+id/nav_terms"
+            android:icon="@drawable/ic_termsncondition"
+            android:title="About Us" />
+        <item
+            android:id="@+id/signout"
+            android:icon="@drawable/ic_signout"
+            android:title="Signout" />
+    </group>
+    <item android:title="Share with others">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share"
+                android:title="Share" />
+        </menu>
+    </item>
+</menu>
