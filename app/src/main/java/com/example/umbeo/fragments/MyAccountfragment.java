@@ -1,95 +1,73 @@
 package com.example.umbeo.fragments;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.umbeo.R;
-import com.example.umbeo.api.RetrofitClient;
-import com.example.umbeo.response_data.user;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static android.content.Context.MODE_PRIVATE;
+import com.example.umbeo.activity.addShop;
+import com.example.umbeo.activity.updateName;
+import com.example.umbeo.activity.userProfile;
+import com.example.umbeo.response_data.shopKeeper;
+import com.example.umbeo.storage.SharedprefManager;
 
 public class MyAccountfragment extends Fragment {
 
-    TextView id,name,no,mail;
+    TextView id,name,no,mail,token;
+    Button update,addshop,show;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_myaccount,container,false);
+        View v = inflater.inflate(R.layout.fragment_myaccount, container, false);
 
-        id=(TextView) v.findViewById(R.id.id);
-        name=(TextView) v.findViewById(R.id.name);
-        no=(TextView) v.findViewById(R.id.phone);
-        mail=(TextView) v.findViewById(R.id.email);
+       // id = (TextView) v.findViewById(R.id.id);
 
+       // token=(TextView)v.findViewById(R.id.token);
+       // shopKeeper muser= SharedprefManager.getInstance(getContext()).getUser();
 
+       // String i= muser.getId();
+       // String nam=muser.getName();
+       // String phone= muser.getPhone();
+       // String em= muser.getEmail();
+       // String token1= SharedprefManager.getInstance(getContext()).getToken();
+       // id.setText(i);
+       // name.setText(nam);
+       // no.setText(phone);
+       // mail.setText(em);
+       // token.setText(token1);
 
-        Call<user> call= RetrofitClient
-                .getmInstance()
-                .getApi()
-                .Me();
+        update= (Button) v.findViewById(R.id.updatename);
 
-        call.enqueue(new Callback<user>() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<user> call, final Response<user> response) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        try {
-                            if (response.code() == 200) {
-
-                                user user = response.body();
-                                String nam = user.getName();
-                                String i = user.getId();
-                                String em = user.getEmail();
-                                String numb = user.getPhone();
-
-                                id.setText(i);
-                                name.setText(nam);
-                                no.setText(numb);
-                                mail.setText(em);
-
-                            } else {
-                                String s = response.errorBody().string();
-                                JSONObject temp = new JSONObject(s);
-                                Toast.makeText(getActivity(), "Error: " + temp.get("message"), Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        catch (IOException | JSONException e) {
-                            Toast.makeText(getActivity(), "Error: " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-
-                });
-            }
-
-            @Override
-            public void onFailure(Call<user> call, Throwable t) {
-
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), updateName.class));
             }
         });
 
+        addshop=(Button) v.findViewById(R.id.addshop);
+        addshop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), addShop.class));
+            }
+        });
+
+        show=(Button)v.findViewById(R.id.showprofile);
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), userProfile.class));
+            }
+        });
         return v;
     }
 

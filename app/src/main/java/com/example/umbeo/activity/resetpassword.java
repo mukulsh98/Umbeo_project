@@ -32,6 +32,7 @@ public class resetpassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resetpassword);
 
+
         send=(Button)findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,8 @@ public class resetpassword extends AppCompatActivity {
                 send.setEnabled(true);
             }
         });
+
+
     }
 
     private void dowork(){
@@ -108,4 +111,6 @@ public class resetpassword extends AppCompatActivity {
         }
 
     }
+
+
 }

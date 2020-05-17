@@ -14,7 +14,8 @@ import android.widget.Toast;
 import com.example.umbeo.R;
 import com.example.umbeo.api.RetrofitClient;
 import com.example.umbeo.response_data.LoginResponse;
-import com.example.umbeo.response_data.user;
+import com.example.umbeo.response_data.loginrequest_response;
+import com.example.umbeo.storage.SharedprefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 
 public class login extends AppCompatActivity {
 
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     Button signup,login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class login extends AppCompatActivity {
                 startActivity(new Intent(login.this, com.example.umbeo.activity.signup.class));
             }
         });
+
+
         final TextView forgotpassword=(TextView)findViewById(R.id.forget);
         forgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +53,8 @@ public class login extends AppCompatActivity {
                 startActivity(new Intent(login.this,forget_password.class));
             }
         });
+
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +65,20 @@ public class login extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart(){
+
+        super.onStart();
+
+        // shopKeeper is already logged in...
+        if (SharedprefManager.getInstance(this).isLoggedIn()){
+            Intent i= new Intent(com.example.umbeo.activity.login.this,homescreen.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        }
+    }
+
     private void userlogin(){
         EditText uname=(EditText)findViewById(R.id.username);
         EditText pass=(EditText)findViewById(R.id.pass);
@@ -81,6 +101,12 @@ public class login extends AppCompatActivity {
             login.setEnabled(true);
             return;
         }
+        if(!(email.matches(emailPattern))){
+            err.setBackgroundColor(Color.parseColor("#f0f8ff"));
+            err.setText("Please Enter valid Email");
+            login.setEnabled(true);
+            return;
+        }
         if(password.isEmpty()){
             err.setBackgroundColor(Color.parseColor("#f0f8ff"));
             login.setEnabled(true);
@@ -89,13 +115,13 @@ public class login extends AppCompatActivity {
         }
 
 
-        Call<LoginResponse>call= RetrofitClient
+        Call<loginrequest_response>call= RetrofitClient
                 .getmInstance()
                 .getApi()
                 .userLogin(email,password);
-        call.enqueue(new Callback<LoginResponse>() {
+        call.enqueue(new Callback<loginrequest_response>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, final Response<LoginResponse> response) {
+            public void onResponse(Call<loginrequest_response> call, final Response<loginrequest_response> response) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -103,10 +129,18 @@ public class login extends AppCompatActivity {
                         try {
                             if (response.code() == 200) {
 
-                                LoginResponse loginResponse= response.body();
+                                loginrequest_response loginResponse= response.body();
                                 if(loginResponse.getStatus().toString().matches("success")) {
                                     login.setEnabled(true);
-                                    startActivity(new Intent(login.this, homescreen.class));
+
+                                    SharedprefManager.getInstance(login.this)
+                                            .saveToken(loginResponse.getToken());
+
+                                    Intent i= new Intent(com.example.umbeo.activity.login.this,com.example.umbeo.activity.homescreen.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(i);
+
+
 
                                 }
                             }
@@ -126,7 +160,7 @@ public class login extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<loginrequest_response> call, Throwable t) {
 
             }
         });

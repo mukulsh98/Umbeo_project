@@ -1,10 +1,10 @@
 package com.example.umbeo.response_data;
 
-public class LoginResponse {
+public class UpdateResponse {
     private String status;
     private shopKeeper shopKeeper;
 
-    public LoginResponse(String status,  shopKeeper shopKeeper) {
+    public UpdateResponse(String status, shopKeeper shopKeeper) {
         this.status = status;
 
         this.shopKeeper = shopKeeper;
@@ -14,13 +14,8 @@ public class LoginResponse {
         return status;
     }
 
-    /*
-    public String getToken() {
-        return token;
-    }
 
 
-     */
     public shopKeeper getShopKeeper() {
         return shopKeeper;
     }

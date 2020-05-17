@@ -2,8 +2,9 @@ package com.example.umbeo.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
-import com.example.umbeo.response_data.user;
+import com.example.umbeo.response_data.shopKeeper;
 
 public class SharedprefManager {
 
@@ -23,19 +24,32 @@ public class SharedprefManager {
         return mInstance;
     }
 
-    public void saveUser(user muser){
+    public void saveUser(shopKeeper muser){
 
-        SharedPreferences sharedPreferences= mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor= sharedPreferences.edit();
 
-        editor.putString("id",muser.getId());
-        editor.putString("name",muser.getName());
-        editor.putString("number",muser.getPhone());
-        editor.putString("email",muser.getEmail());
+            SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.apply();
+            editor.putString("id", muser.getId());
+            editor.putString("name", muser.getName());
+            editor.putString("number", muser.getPhone());
+            editor.putString("email", muser.getEmail());
+
+
+            editor.apply();
 
     }
+
+    public void saveToken(String token){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("token", token);
+
+        editor.apply();
+    }
+
+
 
     public boolean isLoggedIn(){
 
@@ -47,9 +61,33 @@ public class SharedprefManager {
         return false;
     }
 
-    public user getUser(){
+    public shopKeeper getUser(){
         SharedPreferences sharedPreferences= mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        
+        shopKeeper muser= new shopKeeper(
+                sharedPreferences.getString("id","nouser"),
+                sharedPreferences.getString("name",null),
+                sharedPreferences.getString("number",null),
+                sharedPreferences.getString("email",null)
+
+        );
+
+        return muser;
+    }
+
+    public String getToken(){
+
+        SharedPreferences sharedPreferences= mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+
+        String token= sharedPreferences.getString("token",null);
+
+        return token;
+    }
+
+    public void clear(){
+        SharedPreferences sharedPreferences= mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
     }
 
 

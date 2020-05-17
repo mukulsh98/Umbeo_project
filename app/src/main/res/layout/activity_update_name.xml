@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/background_light">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.updateName">
 
     <RelativeLayout
         android:id="@+id/a1"
@@ -17,6 +17,7 @@
             android:layout_centerInParent="true"
             android:src="@drawable/logo" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +27,6 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="222dp"
-
             android:layout_height="88dp"
             android:fontFamily="cursive"
             android:layout_marginTop="64dp"
@@ -37,7 +37,6 @@
             android:gravity="center"
             android:layout_centerInParent="true"
             android:visibility="visible"
-
             app:layout_constraintHorizontal_bias="0.338"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,33 +47,37 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/a2"
-        android:gravity="center">
+        android:layout_below="@+id/a2">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/i2">
-            <Button
-                android:id="@+id/listproduct"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="List All My Products"
+                android:text="Update User-Name"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/newname"
+                android:layout_width="208dp"
+                android:layout_height="57dp"
+                android:hint="Enter Name"
+                app:layout_constraintHorizontal_bias="0.315"
+                app:layout_constraintVertical_bias="0.309"
+                />
+            <Button
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/addproduct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add New Product"
-                android:textStyle="bold"/>
         </LinearLayout>
-
     </RelativeLayout>
-
-
-
-
-
 </RelativeLayout>

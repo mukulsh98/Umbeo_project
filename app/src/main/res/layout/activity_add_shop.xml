@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.addShop">
+
+
+    <RelativeLayout
+        android:id="@+id/a1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/logo" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/a2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a1">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="222dp"
+            android:layout_height="88dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="64dp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="Umbeo "
+            android:textAlignment="center"
+            android:textColor="#2616cb"
+            android:textSize="42dp"
+            android:visibility="visible"
+            app:layout_constraintHorizontal_bias="0.338"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/m1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Shop Name*: " />
+
+                <EditText
+                    android:id="@+id/productname"
+                    android:layout_width="208dp"
+                    android:layout_height="57dp"
+                    app:layout_constraintHorizontal_bias="0.315"
+                    app:layout_constraintVertical_bias="0.309" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/m2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Shop Address*: " />
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="208dp"
+                    android:layout_height="57dp"
+                    app:layout_constraintHorizontal_bias="0.315"
+                    app:layout_constraintVertical_bias="0.309" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/m3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Product Name*: " />
+
+                <EditText
+                    android:id="@+id/district"
+                    android:layout_width="208dp"
+                    android:layout_height="57dp"
+                    app:layout_constraintHorizontal_bias="0.315"
+                    app:layout_constraintVertical_bias="0.309" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/senddata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Shop"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -22,6 +22,7 @@ import com.example.umbeo.fragments.MyAccountfragment;
 import com.example.umbeo.fragments.MyProductfragment;
 import com.example.umbeo.fragments.Termsfragment;
 import com.example.umbeo.response_data.forgetpassword_response;
+import com.example.umbeo.storage.SharedprefManager;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
@@ -43,6 +44,8 @@ public class homescreen extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -56,7 +59,7 @@ public class homescreen extends AppCompatActivity implements NavigationView.OnNa
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MyAccountfragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_myproduct);
+            navigationView.setCheckedItem(R.id.nav_myaccount);
         }
     }
     @Override
@@ -100,6 +103,8 @@ public class homescreen extends AppCompatActivity implements NavigationView.OnNa
     }
 
     public void dosignout(){
+
+
         Call<forgetpassword_response> call= RetrofitClient
                 .getmInstance()
                 .getApi()
@@ -116,8 +121,14 @@ public class homescreen extends AppCompatActivity implements NavigationView.OnNa
                             if (response.code()==200){
 
                                 forgetpassword_response rep=response.body();
-                                if(rep.getStatus().toString().matches("success"))
-                                    startActivity(new Intent(homescreen.this,login.class));
+                                if(rep.getStatus().toString().matches("success")){
+
+                                    SharedprefManager.getInstance(homescreen.this).clear();
+
+                                    Intent intent= new Intent(homescreen.this,login.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
                             }
                             else{
                                 String s = response.errorBody().string();

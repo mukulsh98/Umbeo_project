@@ -28,6 +28,8 @@ public class forget_password extends AppCompatActivity {
 
     Button send;
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
@@ -43,6 +45,8 @@ public class forget_password extends AppCompatActivity {
         });
 
     }
+
+
     private void operation(){
         EditText em=(EditText)findViewById(R.id.email);
         final String email=em.getText().toString();
@@ -94,5 +98,9 @@ public class forget_password extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+
 }

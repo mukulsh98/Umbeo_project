@@ -1,12 +1,13 @@
 package com.example.umbeo.response_data;
 
-public class user {
+public class shopKeeper {
     private String id,name,email,phone;
-    public user(String id, String name, String email, String phone) {
+    public shopKeeper(String id, String name, String email, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
+
     }
 
     public String getId() {
@@ -14,6 +15,7 @@ public class user {
     }
 
     public String getName() {
+
         return name;
     }
 
@@ -23,5 +25,10 @@ public class user {
 
     public String getPhone() {
         return phone;
+    }
+
+
+    public void setName(String name){
+        this.name=name;
     }
 }
