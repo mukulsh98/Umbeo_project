@@ -3,30 +3,38 @@ package com.example.umbeo.api;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProductRetrofit {
-    private static final String BASE_URL="https://umbeo-delivery-app.herokuapp.com/api/v1/shops/myShops";
-    private static ProductRetrofit mInstance;
+public class ProductretrofitClient {
+
+    private static final String BASE_URL="https://umbeo-delivery-app.herokuapp.com/api/v1/";
+    private static ProductretrofitClient mInstance;
     private Retrofit retrofit;
 
 
-    private ProductRetrofit(){
+    private ProductretrofitClient(){
+
+
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+
+
     }
 
-    public   static synchronized ProductRetrofit getmInstance(){
 
+
+    public static synchronized ProductretrofitClient getmInstance(){
         if(mInstance==null){
-            mInstance=new ProductRetrofit();
+            mInstance=new ProductretrofitClient();
         }
         return mInstance;
     }
 
+
     public Api getApi(){
-        return  retrofit.create(Api.class);
+        return retrofit.create(Api.class);
     }
-
-
 }
+

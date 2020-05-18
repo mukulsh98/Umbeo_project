@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.umbeo.R;
 import com.example.umbeo.api.RetrofitClient;
 import com.example.umbeo.response_data.LoginResponse;
+import com.example.umbeo.response_data.loginrequest_response;
 import com.example.umbeo.response_data.shopKeeper;
 import com.example.umbeo.storage.SharedprefManager;
 
@@ -38,21 +39,26 @@ public class userProfile extends AppCompatActivity {
         String token1= SharedprefManager.getInstance(getApplicationContext()).getToken();
 
 
-        Call<LoginResponse> call = RetrofitClient
+        Call<loginrequest_response> call = RetrofitClient
                 .getmInstance()
                 .getApi()
                 .getProfile(token1);
 
-        call.enqueue(new Callback<LoginResponse>() {
+        call.enqueue(new Callback<loginrequest_response>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, final Response<LoginResponse> response) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try{
-                            if(response.code()==200){
+            public void onResponse(Call<loginrequest_response> call,  Response<loginrequest_response> response) {
 
-                                LoginResponse loginResponse = response.body();
+                        try {
+                            if (response.code() == 200) {
+
+                                loginrequest_response ans = response.body();
+
+                                Toast.makeText(getApplicationContext(), "" +ans.getShopKeeper().getName(), Toast.LENGTH_LONG).show();
+                            }
+
+                              /*
+
+
                                 if(loginResponse.getStatus().toString().matches("success")){
 
                                     shopKeeper shop= loginResponse.getShopKeeper();
@@ -69,22 +75,26 @@ public class userProfile extends AppCompatActivity {
 
                                 }
                             }
-                            else{
+                            */
+
+                            else {
 
                                 String s = response.errorBody().string();
-                                JSONObject temp=new JSONObject(s);
-                                Toast.makeText(getApplicationContext(),"Error: "+temp.get("message"),Toast.LENGTH_LONG).show();
+                                JSONObject temp = new JSONObject(s);
+                                Toast.makeText(getApplicationContext(), "Error: " + temp.get("message"), Toast.LENGTH_LONG).show();
                             }
 
-                        }  catch (IOException | JSONException e) {
-                            Toast.makeText(getApplicationContext(),"Error: "+e.getMessage().toString(),Toast.LENGTH_LONG).show();
+                        } catch (IOException | JSONException e) {
+                            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
                         }
-                    }
-                });
+
+
+
+
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<loginrequest_response> call, Throwable t) {
 
             }
         });

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.umbeo.R;
 import com.example.umbeo.activity.addShop;
+import com.example.umbeo.activity.shopShop;
 import com.example.umbeo.activity.updateName;
 import com.example.umbeo.activity.userProfile;
 import com.example.umbeo.response_data.shopKeeper;
@@ -22,7 +23,7 @@ import com.example.umbeo.storage.SharedprefManager;
 public class MyAccountfragment extends Fragment {
 
     TextView id,name,no,mail,token;
-    Button update,addshop,show;
+    Button update,addshop,show,showshop;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,6 +67,14 @@ public class MyAccountfragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), userProfile.class));
+            }
+        });
+
+        showshop=(Button)v.findViewById(R.id.showshop);
+        showshop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), shopShop.class));
             }
         });
         return v;

@@ -3,14 +3,14 @@ package com.example.umbeo.api;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient {
+public class ShopretrofitClient {
 
-    private static final String BASE_URL="https://umbeo-delivery-app.herokuapp.com/api/v1/shopkeepers/";
-    private static RetrofitClient mInstance;
+    private static final String BASE_URL="https://umbeo-delivery-app.herokuapp.com/api/v1/shops/";
+    private static ShopretrofitClient mInstance;
     private Retrofit retrofit;
 
 
-    private RetrofitClient(){
+    private ShopretrofitClient(){
 
 
 
@@ -25,9 +25,9 @@ public class RetrofitClient {
 
 
 
-    public static synchronized RetrofitClient getmInstance(){
+    public static synchronized ShopretrofitClient getmInstance(){
         if(mInstance==null){
-            mInstance=new RetrofitClient();
+            mInstance=new ShopretrofitClient();
         }
         return mInstance;
     }

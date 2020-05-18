@@ -4,6 +4,9 @@ import com.example.umbeo.response_data.LoginResponse;
 import com.example.umbeo.response_data.UpdateResponse;
 import com.example.umbeo.response_data.forgetpassword_response;
 import com.example.umbeo.response_data.loginrequest_response;
+import com.example.umbeo.response_data.shopKeeperDetailsFromdb;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -30,7 +33,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("login")
-    Call<loginrequest_response> userLogin(
+    Call<LoginResponse> userLogin(
             @Field("email") String email,
             @Field("password") String password
     );
@@ -50,7 +53,7 @@ public interface Api {
     );
 
     @GET("me")
-    Call<LoginResponse> getProfile(
+    Call<loginrequest_response> getProfile(
             @Header("Authorization") String header
     );
 
@@ -60,7 +63,7 @@ public interface Api {
     );
 
 
-
+    @FormUrlEncoded
     @PATCH("me")
     Call<UpdateResponse> updateName(
             @Header("Authorization") String header,
@@ -69,12 +72,33 @@ public interface Api {
 
 
 
+    @FormUrlEncoded
     @POST("myShops")
     Call<forgetpassword_response> addShop(
             @Header("Authorization") String header,
             @Field("name") String name,
             @Field("address") String address,
             @Field("district") String district
+    );
+
+
+    @FormUrlEncoded
+    @POST("products")
+    Call<forgetpassword_response> addProduct(
+         @Header("Authorization")  String header,
+         @Field("name") String name,
+         @Field("category") String category,
+         @Field("quantityAvailable") String quantity,
+         @Field("price") String price,
+         @Field("description") String description,
+         @Field("shopName") String shopName
+
+
+    );
+
+    @GET("myShops")
+    Call<List<shopKeeperDetailsFromdb>> getAllshop(
+      @Header("Authorization") String header
     );
 
 

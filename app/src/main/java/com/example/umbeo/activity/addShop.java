@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 import com.example.umbeo.R;
 import com.example.umbeo.api.Api;
-import com.example.umbeo.api.ProductRetrofit;
+import com.example.umbeo.api.RetrofitClient;
+import com.example.umbeo.api.ShopretrofitClient;
 import com.example.umbeo.response_data.forgetpassword_response;
 import com.example.umbeo.storage.SharedprefManager;
 
@@ -37,11 +38,7 @@ public class addShop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shop);
 
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://umbeo-delivery-app.herokuapp.com/api/v1/shops/myShops")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-        Api userClient= retrofit.create(Api.class);
+
 
 
         send=(Button)findViewById(R.id.senddata);
@@ -84,10 +81,10 @@ public class addShop extends AppCompatActivity {
             return;
         }
 
-        Call<forgetpassword_response> call= ProductRetrofit
+        Call<forgetpassword_response> call= ShopretrofitClient
                 .getmInstance()
                 .getApi()
-                .addShop(userid,name,add,district);
+                .addShop(userid, name,add,district);
 
         call.enqueue(new Callback<forgetpassword_response>() {
             @Override

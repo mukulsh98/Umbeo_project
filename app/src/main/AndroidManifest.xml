@@ -12,7 +12,9 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.userProfile"></activity>
+        <activity android:name=".activity.shopShop"></activity>
+        <activity android:name=".product.productadd" />
+        <activity android:name=".activity.userProfile" />
         <activity android:name=".activity.addShop" />
         <activity android:name=".activity.updateName" />
         <activity android:name=".activity.addProduct" />

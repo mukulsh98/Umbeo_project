@@ -1,18 +1,20 @@
 package com.example.umbeo.response_data;
 
 public class loginrequest_response {
-    private String status,token;
+    private String status;
+    private shopKeeper user;
 
-    public loginrequest_response(String status, String token) {
+    public loginrequest_response(String status, shopKeeper user) {
         this.status = status;
-        this.token = token;
+        this.user = user;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public String getToken() {
-        return token;
+    public shopKeeper getShopKeeper(){
+        return user;
     }
+
 }

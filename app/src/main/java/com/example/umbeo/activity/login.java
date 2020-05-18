@@ -115,26 +115,28 @@ public class login extends AppCompatActivity {
         }
 
 
-        Call<loginrequest_response>call= RetrofitClient
+        Call<LoginResponse>call= RetrofitClient
                 .getmInstance()
                 .getApi()
                 .userLogin(email,password);
-        call.enqueue(new Callback<loginrequest_response>() {
+        call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<loginrequest_response> call, final Response<loginrequest_response> response) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+            public void onResponse(Call<LoginResponse> call,  Response<LoginResponse> response) {
+
+
 
                         try {
-                            if (response.code() == 200) {
+                            if (response.code()== 200) {
 
-                                loginrequest_response loginResponse= response.body();
+                                LoginResponse loginResponse= response.body();
+
+
+
                                 if(loginResponse.getStatus().toString().matches("success")) {
                                     login.setEnabled(true);
-
-                                    SharedprefManager.getInstance(login.this)
+                                    SharedprefManager.getInstance(com.example.umbeo.activity.login.this)
                                             .saveToken(loginResponse.getToken());
+
 
                                     Intent i= new Intent(com.example.umbeo.activity.login.this,com.example.umbeo.activity.homescreen.class);
                                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -143,6 +145,10 @@ public class login extends AppCompatActivity {
 
 
                                 }
+
+
+
+
                             }
                             else {
                                 String s = response.errorBody().string();
@@ -155,12 +161,12 @@ public class login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage().toString(), Toast.LENGTH_LONG).show();
                             login.setEnabled(true);
                         }
-                    }
-                });
+
+
             }
 
             @Override
-            public void onFailure(Call<loginrequest_response> call, Throwable t) {
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
 
             }
         });

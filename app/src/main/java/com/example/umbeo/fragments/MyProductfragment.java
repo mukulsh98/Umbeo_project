@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.umbeo.R;
 import com.example.umbeo.activity.addProduct;
+import com.example.umbeo.product.productadd;
 
 public class MyProductfragment extends Fragment {
 
@@ -28,7 +29,7 @@ public class MyProductfragment extends Fragment {
        addpro.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               startActivity(new Intent(getActivity(), addProduct.class));
+               startActivity(new Intent(getActivity(), productadd.class));
            }
        });
 

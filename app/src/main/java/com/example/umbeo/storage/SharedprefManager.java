@@ -24,16 +24,16 @@ public class SharedprefManager {
         return mInstance;
     }
 
-    public void saveUser(shopKeeper muser){
+    public void saveUser(shopKeeper user){
 
 
             SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            editor.putString("id", muser.getId());
-            editor.putString("name", muser.getName());
-            editor.putString("number", muser.getPhone());
-            editor.putString("email", muser.getEmail());
+            editor.putString("id", user.getId());
+            editor.putString("name", user.getName());
+            editor.putString("number", user.getPhone());
+            editor.putString("email", user.getEmail());
 
 
             editor.apply();
